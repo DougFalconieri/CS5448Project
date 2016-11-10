@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import java.lang.*?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Button?>
+
+<Scene xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ui.controllers.CreateOrderController" width="800" height="600">
+	<BorderPane>
+		<center>
+			<VBox styleClass="main-content">
+				<children>
+					<Label styleClass="header" text="Create Purchase Order" />
+					<HBox styleClass="form-group">
+						<children>
+							<Label styleClass="control-label" text="Item Category:" />
+							<ChoiceBox>
+								<items>
+							        <FXCollections fx:factory="observableArrayList">
+							            <String fx:value="Electronics" />
+							            <String fx:value="Office Supplies" />
+							            <String fx:value="Furniture" />
+							            <String fx:value="Other" />
+							        </FXCollections>
+							    </items>
+							</ChoiceBox>
+						</children>
+					</HBox>
+					<HBox styleClass="form-group">
+						<children>
+							<Label styleClass="control-label" text="Item:" />
+							<ChoiceBox>
+								<items>
+							        <FXCollections fx:factory="observableArrayList">
+							            <String fx:value="Laptop" />
+							            <String fx:value="Phone" />
+							            <String fx:value="Tablet" />
+							        </FXCollections>
+							    </items>
+							</ChoiceBox>
+						</children>
+					</HBox>
+					<HBox styleClass="form-group">
+						<children>
+							<Label styleClass="control-label" text="Item (if not in list):" />
+							<TextField />
+						</children>
+					</HBox>
+					<HBox styleClass="form-group">
+						<children>
+							<Label styleClass="control-label" text="Quantity:" />
+							<TextField prefWidth="40" />
+						</children>
+					</HBox>
+					<HBox styleClass="form-group">
+						<children>
+							<Label styleClass="control-label" text="Facility:" />
+							<ChoiceBox>
+								<items>
+							        <FXCollections fx:factory="observableArrayList">
+							            <String fx:value="San Jose" />
+							            <String fx:value="Boulder" />
+							            <String fx:value="Boston" />
+							        </FXCollections>
+							    </items>
+							</ChoiceBox>
+						</children>
+					</HBox>
+					<HBox styleClass="form-group">
+						<children>
+							<Label styleClass="control-label" text="Office/Room Number:" />
+							<TextField prefWidth="40" />
+						</children>
+					</HBox>
+					<HBox styleClass="form-group">
+						<children>
+							<Label styleClass="control-label" text="Justification:" />
+							<TextArea />
+						</children>
+					</HBox>
+					<HBox styleClass="form-group">
+						<children>
+							<Button text="Save" />
+							<Button text="Submit" />
+						</children>
+					</HBox>
+				</children>
+			</VBox>
+		</center>
+	</BorderPane>
+</Scene>
+
