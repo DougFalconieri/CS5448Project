@@ -24,13 +24,18 @@
 					<HBox styleClass="form-group">
 						<children>
 							<Label styleClass="control-label" text="Email:" />
-							<TextField />
+							<TextField fx:id="email" />
 						</children>
 					</HBox>
 					<HBox styleClass="form-group">
 						<children>
 							<Label styleClass="control-label" text="Password:" />
-							<PasswordField />
+							<PasswordField fx:id="password" />
+						</children>
+					</HBox>
+					<HBox styleClass="form-group">
+						<children>
+							<Button text="Submit" onAction="#login" />
 						</children>
 					</HBox>
 				</children>
