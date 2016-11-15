@@ -1,12 +1,17 @@
 package application.ui.controllers;
 
-import application.ui.views.ViewLoader;
-import javafx.stage.Stage;
+import application.models.User;
 
 public class BaseController {
-	protected ViewLoader viewLoader;
+	protected ApplicationController applicationController;
 
-	public void setViewLoader(ViewLoader viewLoader) {
-		this.viewLoader = viewLoader;
+	public void setApplicationController(ApplicationController applicationController) {
+		this.applicationController = applicationController;
 	}
+
+	public User getCurrentUser() {
+		return applicationController.getCurrentUser();
+	}
+	
+	public void onLoad() {}
 }

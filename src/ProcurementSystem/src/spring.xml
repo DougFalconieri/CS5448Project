@@ -23,6 +23,7 @@
         <property name="annotatedClasses">
             <list>
                 <value>application.models.User</value>
+                <value>application.models.Role</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -46,8 +47,12 @@
 	</bean>
 	
 	<!-- Controllers -->
-	<bean id="WelcomeController" class="application.ui.controllers.WelcomeController">
+	<bean id="LoginController" class="application.ui.controllers.LoginController">
 		<property name="userRepository" ref="hibernateUserRepository" />
+	</bean>
+	
+	<bean id="WelcomeController" class="application.ui.controllers.WelcomeController">
+		
 	</bean>
 	
 	<bean id="MainMenuController" class="application.ui.controllers.MainMenuController">

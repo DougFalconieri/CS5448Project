@@ -1,11 +1,10 @@
-package application.ui.views;
+package application.ui.controllers;
 
 import java.io.IOException;
 
 import org.springframework.context.ApplicationContext;
 
-import application.ui.controllers.BaseController;
-import application.ui.controllers.MainMenuController;
+import application.models.User;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
@@ -13,26 +12,47 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-public class ViewLoader {
+public class ApplicationController {
 	private ApplicationContext context;
 	private Stage stage;
+	private User currentUser;
 	
-	public ViewLoader(ApplicationContext context, Stage stage) {
+	public ApplicationController(ApplicationContext context, Stage stage) {
 		this.context = context;
 		this.stage = stage;
 	}
 	
-	public void loadMenuedScreen(String viewFilename) {
+	public void setCurrentUser(User currentUser) {
+		this.currentUser = currentUser;
+	}
+
+	public User getCurrentUser() {
+		return currentUser;
+	}
+
+	public Scene loadMenuedScreen(String viewFilename) {
+		Scene scene = null;
 		try {
-			Scene scene = loadFXMLComponent(viewFilename);
+			scene = loadScreen(viewFilename);
 			MenuBar menu = loadFXMLComponent("/application/ui/views/MainMenu.fxml");
 		    BorderPane pane = (BorderPane) scene.getRoot();
 		    pane.setTop(menu);
-		    scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return scene;
+	}
+	
+	public Scene loadScreen(String viewFilename) {
+		Scene scene = null;
+		try {
+			scene = loadFXMLComponent(viewFilename);
+		    scene.getStylesheets().add(getClass().getResource("../views/application.css").toExternalForm());
 			stage.setScene(scene);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		return scene;
 	}
 	
 	private <T> T loadFXMLComponent(String fxmlFilename) throws IOException {
@@ -46,7 +66,8 @@ public class ViewLoader {
 		});
 	    T component = componentLoader.load();
 	    BaseController controller = componentLoader.getController();
-	    controller.setViewLoader(this);
+	    controller.setApplicationController(this);
+	    controller.onLoad();
 	    return component;
 	}
 }

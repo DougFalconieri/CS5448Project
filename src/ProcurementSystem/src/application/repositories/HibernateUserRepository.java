@@ -18,7 +18,7 @@ public class HibernateUserRepository implements UserRepository {
     
 	@Override
 	public User findUser(String email, String password) {
-		String hql = "FROM User u WHERE u.email = :email AND u.password = :password";
+		String hql = "FROM User u JOIN FETCH u.roles WHERE u.email = :email AND u.password = :password";
 		@SuppressWarnings("unchecked")
 		TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("email", email);

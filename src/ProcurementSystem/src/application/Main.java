@@ -2,21 +2,21 @@ package application;
 	
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import application.ui.views.ViewLoader;
+import application.ui.controllers.ApplicationController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 
 public class Main extends Application {
-	private ViewLoader viewLoader;
+	private ApplicationController applicationController;
 	private ClassPathXmlApplicationContext context;
 	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			context = new ClassPathXmlApplicationContext("spring.xml");
-			viewLoader = new ViewLoader(context, primaryStage);
-			viewLoader.loadMenuedScreen("/application/ui/views/Welcome.fxml");
+			applicationController = new ApplicationController(context, primaryStage);
+			applicationController.loadScreen("/application/ui/views/Login.fxml");
 			primaryStage.setTitle("EZProcure");
 			primaryStage.show();
 		} catch(Exception e) {
