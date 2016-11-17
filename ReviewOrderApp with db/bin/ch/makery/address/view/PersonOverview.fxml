@@ -59,6 +59,7 @@
                         <Button mnemonicParsing="false" text="Reject" />
                     </buttons>
                   </ButtonBar>
+                  <Button layoutX="14.0" layoutY="251.0" mnemonicParsing="false" text="Back" />
                </children>
             </AnchorPane>
         </items>
