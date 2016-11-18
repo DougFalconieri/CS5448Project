@@ -15,7 +15,7 @@ public class HibernateUserRepository implements UserRepository {
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
-    
+
 	@Override
 	public User findUser(String email, String password) {
 		String hql = "FROM User u JOIN FETCH u.roles WHERE u.email = :email AND u.password = :password";

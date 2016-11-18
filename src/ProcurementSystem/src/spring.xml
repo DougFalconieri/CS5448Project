@@ -9,7 +9,7 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context-4.1.xsd">
-	
+
 	<!-- Hibernate Configuration -->
 	<bean id="ezprocureDataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -17,7 +17,7 @@
         <property name="username" value="root"/>
         <property name="password" value="root"/>
     </bean>
-    
+
     <bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="ezprocureDataSource"/>
         <property name="annotatedClasses">
@@ -33,30 +33,30 @@
 	        </props>
         </property>
     </bean>
-    
+
     <tx:annotation-driven transaction-manager="txManager"/>
     <bean id="txManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
     	<property name="sessionFactory" ref="hibernateSessionFactory" />
     </bean>
-    
+
     <context:annotation-config></context:annotation-config>
-	
+
 	<!-- Repositories -->
 	<bean id="hibernateUserRepository" class="application.repositories.HibernateUserRepository">
 		<property name="sessionFactory" ref="hibernateSessionFactory" />
 	</bean>
-	
+
 	<!-- Controllers -->
 	<bean id="LoginController" class="application.ui.controllers.LoginController">
 		<property name="userRepository" ref="hibernateUserRepository" />
 	</bean>
-	
+
 	<bean id="WelcomeController" class="application.ui.controllers.WelcomeController">
-		
+
 	</bean>
-	
+
 	<bean id="MainMenuController" class="application.ui.controllers.MainMenuController">
-		
+
 	</bean>
 
 </beans>
