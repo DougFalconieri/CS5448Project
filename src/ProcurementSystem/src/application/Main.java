@@ -8,7 +8,7 @@ import application.models.Employee;
 import application.models.Person;
 import application.models.QueryEmployeeDemo;
 import application.ui.controllers.ApplicationController;
-import application.ui.views.PersonOverviewController;
+import application.ui.controllers.PersonOverviewController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,13 +35,13 @@ public class Main extends Application {
     	employeelist.queryEmployee();
     	for (Employee tempEmployee : employeelist.getTheEmployees()){
     		personData.add(new Person(tempEmployee.getFirstName(), tempEmployee.getLastName(), tempEmployee.getId(), tempEmployee.getreviewOrder()));
-    		//System.out.println(personData);
+    		System.out.println(personData);
     	}
     }
 
-    public ObservableList<Person> getPersonData() {
+   public ObservableList<Person> getPersonData() {
         return personData;
-    }
+   }
 
     public void setPersonData(ObservableList<Person> personData) {
 		this.personData = personData;
@@ -57,8 +57,8 @@ public class Main extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("ReviewOrderApp");
 
-        initRootLayout();
-        showPersonOverview();
+        //initRootLayout();
+        //showPersonOverview();
         //Yi's code<finished>
 
 		try {
@@ -113,11 +113,6 @@ public class Main extends Application {
 	        return primaryStage;
 	    }
 	    //Yi's code<finished>
-
-
-
-
-
 
 	@Override
 	public void stop() throws Exception {

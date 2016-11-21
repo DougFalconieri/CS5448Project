@@ -1,4 +1,4 @@
-package application.ui.views;
+package application.ui.controllers;
 
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
