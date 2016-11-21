@@ -3,7 +3,7 @@ package application.ui.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import application.models.PurchaseOrder;
+import application.models.Order;
 import application.repositories.OrderRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,26 +15,26 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class MyOrdersController implements Initializable {
 	@FXML
-	private TableView<PurchaseOrder> orderTable;
+	private TableView<Order> orderTable;
 	@FXML
-	private TableColumn<PurchaseOrder, String> itemColumn;
+	private TableColumn<Order, String> itemColumn;
 	@FXML
-	private TableColumn<PurchaseOrder, Integer> quantityColumn;
+	private TableColumn<Order, Integer> quantityColumn;
 	@FXML
-	private TableColumn<PurchaseOrder, String> statusColumn;
+	private TableColumn<Order, String> statusColumn;
 	@FXML
-	private TableColumn<PurchaseOrder, String> deliveryColumn;
+	private TableColumn<Order, String> deliveryColumn;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		PropertyValueFactory<PurchaseOrder, String> itemProperty = 
-		          new PropertyValueFactory<PurchaseOrder, String>("item");
-		PropertyValueFactory<PurchaseOrder, Integer> quantityProperty = 
-		          new PropertyValueFactory<PurchaseOrder, Integer>("quantity");
-		PropertyValueFactory<PurchaseOrder, String> statusProperty = 
-		          new PropertyValueFactory<PurchaseOrder, String>("status");
-		PropertyValueFactory<PurchaseOrder, String> deliveryProperty = 
-		          new PropertyValueFactory<PurchaseOrder, String>("expectedDelivery");
+		PropertyValueFactory<Order, String> itemProperty = 
+		          new PropertyValueFactory<Order, String>("item");
+		PropertyValueFactory<Order, Integer> quantityProperty = 
+		          new PropertyValueFactory<Order, Integer>("quantity");
+		PropertyValueFactory<Order, String> statusProperty = 
+		          new PropertyValueFactory<Order, String>("status");
+		PropertyValueFactory<Order, String> deliveryProperty = 
+		          new PropertyValueFactory<Order, String>("expectedDelivery");
 		      
 		itemColumn.setCellValueFactory(itemProperty);
 		quantityColumn.setCellValueFactory(quantityProperty);
@@ -42,7 +42,7 @@ public class MyOrdersController implements Initializable {
 		deliveryColumn.setCellValueFactory(deliveryProperty);
 		
 		OrderRepository repository = new OrderRepository();
-		ObservableList<PurchaseOrder> tableItems = FXCollections.observableArrayList();
+		ObservableList<Order> tableItems = FXCollections.observableArrayList();
 		tableItems.addAll(repository.getOrders());
 		orderTable.setItems(tableItems);
 	}
