@@ -42,3 +42,37 @@ INSERT INTO ezprocure.user_role
 VALUES
 (1, 2);
 
+INSERT INTO ezprocure.user_role
+(user_id, role_id)
+VALUES
+(2, 1);
+INSERT INTO ezprocure.user_role
+(user_id, role_id)
+VALUES
+(2, 2);
+INSERT INTO ezprocure.user_role
+(user_id, role_id)
+VALUES
+(2, 3);
+INSERT INTO ezprocure.user_role
+(user_id, role_id)
+VALUES
+(2, 4);
+
+INSERT INTO ezprocure.user_role
+(user_id, role_id)
+VALUES
+(3, 1);
+INSERT INTO ezprocure.user_role
+(user_id, role_id)
+VALUES
+(3, 2);
+INSERT INTO ezprocure.user_role
+(user_id, role_id)
+VALUES
+(3, 3);
+INSERT INTO ezprocure.user_role
+(user_id, role_id)
+VALUES
+(3, 4);
+
