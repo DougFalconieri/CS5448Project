@@ -9,7 +9,7 @@ public class WelcomeController extends BaseController {
 	
 	@Override
 	public void onLoad() {
-		String greetingText = "You are logged in as " + getCurrentUser().getEmail() + 
+		String greetingText = "You are logged in as " + getCurrentUser().getFirstName() + " " + getCurrentUser().getLastName() + 
 				".\nYou have the following roles: " + getCurrentUser().getRolesDescription() + 
 				".\nPlease select a menu item to continue.";
 		greeting.setText(greetingText);

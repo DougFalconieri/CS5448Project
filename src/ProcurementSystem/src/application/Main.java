@@ -29,7 +29,7 @@ public class Main extends Application {
     private BorderPane rootLayout;
     private ObservableList<Person> personData = FXCollections.observableArrayList();
 
-
+    /*
     public Main() {
     	QueryEmployeeDemo employeelist = new QueryEmployeeDemo();
     	employeelist.queryEmployee();
@@ -38,7 +38,7 @@ public class Main extends Application {
     		System.out.println(personData);
     	}
     }
-
+*/
    public ObservableList<Person> getPersonData() {
         return personData;
    }

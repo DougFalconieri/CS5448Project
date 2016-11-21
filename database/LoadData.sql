@@ -1,19 +1,19 @@
+DELETE FROM ezprocure.user_role;
 DELETE FROM ezprocure.user;
 DELETE FROM ezprocure.role;
-DELETE FROM ezprocure.user_role;
 
 INSERT INTO `ezprocure`.`user`
-(`id`,`email`,`password`)
+(`id`,`email`,`password`, `first_name`, `last_name`)
 VALUES
-(1, 'douglas.falconieri@colorado.edu', 'password');
+(1, 'douglas.falconieri@colorado.edu', 'password', 'Doug', 'Falconieri');
 INSERT INTO `ezprocure`.`user`
-(`id`,`email`,`password`)
+(`id`,`email`,`password`, `first_name`, `last_name`)
 VALUES
-(2, 'Yi.Kuo@colorado.edu', 'password');
+(2, 'Yi.Kuo@colorado.edu', 'password', 'Yi', 'Kuo');
 INSERT INTO `ezprocure`.`user`
-(`id`,`email`,`password`)
+(`id`,`email`,`password`, `first_name`, `last_name`)
 VALUES
-(3, 'wash7661@colorado.edu', 'password');
+(3, 'wash7661@colorado.edu', 'password', 'Walid', 'Sharif');
 
 
 INSERT INTO `ezprocure`.`role`
