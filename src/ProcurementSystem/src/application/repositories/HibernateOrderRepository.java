@@ -21,7 +21,7 @@ public class HibernateOrderRepository implements OrderRepository {
     
 	@Override
 	public List<Order> getOrdersForEmployee(User employee) {
-		String hql = "FROM Order o JOIN o.employee e WHERE e.id = :employeeId";
+		String hql = "FROM Order o JOIN FETCH o.item JOIN FETCH o.facility JOIN FETCH o.employee e WHERE e.id = :employeeId";
 		@SuppressWarnings("unchecked")
 		TypedQuery<Order> query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("employeeId", employee.getId());

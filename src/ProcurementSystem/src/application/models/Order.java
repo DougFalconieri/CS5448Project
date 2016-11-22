@@ -1,6 +1,7 @@
 package application.models;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -120,6 +121,10 @@ public class Order {
 	}
 	public Date getExpectedDeliveryDate() {
 		return expectedDeliveryDate;
+	}
+	public String getExpectedDeliveryString() {
+		if (expectedDeliveryDate == null) return "";
+		return new SimpleDateFormat("dd/MM/yyyy").format(expectedDeliveryDate);
 	}
 	public void setExpectedDeliveryDate(Date expectedDeliveryDate) {
 		this.expectedDeliveryDate = expectedDeliveryDate;

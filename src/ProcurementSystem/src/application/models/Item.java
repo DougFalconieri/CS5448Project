@@ -38,5 +38,8 @@ public class Item {
 		this.category = category;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return description;
+	}
 }
