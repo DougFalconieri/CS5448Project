@@ -24,12 +24,18 @@
             <list>
                 <value>application.models.User</value>
                 <value>application.models.Role</value>
+                <value>application.models.Order</value>
+                <value>application.models.Item</value>
+                <value>application.models.ItemCategory</value>
+                <value>application.models.Vendor</value>
+                <value>application.models.Facility</value>
             </list>
         </property>
         <property name="hibernateProperties">
 	        <props>
 	        	<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-	        	<prop key="hbm2ddl.auto">create</prop>
+	        	<prop key="hibernate.show_sql">true</prop>
+	        	<prop key="hibernate.default_catalog">ezprocure</prop>
 	        </props>
         </property>
     </bean>
@@ -45,10 +51,22 @@
 	<bean id="hibernateUserRepository" class="application.repositories.HibernateUserRepository">
 		<property name="sessionFactory" ref="hibernateSessionFactory" />
 	</bean>
+	
+	<bean id="hibernateItemRepository" class="application.repositories.HibernateItemRepository">
+		<property name="sessionFactory" ref="hibernateSessionFactory" />
+	</bean>
+	
+	<bean id="hibernateOrderRepository" class="application.repositories.HibernateOrderRepository">
+		<property name="sessionFactory" ref="hibernateSessionFactory" />
+	</bean>
 
 	<!-- Controllers -->
 	<bean id="LoginController" class="application.ui.controllers.LoginController">
 		<property name="userRepository" ref="hibernateUserRepository" />
+	</bean>
+	
+	<bean id="MyOrdersController" class="application.ui.controllers.MyOrdersController">
+		<property name="orderRepository" ref="hibernateOrderRepository" />
 	</bean>
 
 	<bean id="WelcomeController" class="application.ui.controllers.WelcomeController">

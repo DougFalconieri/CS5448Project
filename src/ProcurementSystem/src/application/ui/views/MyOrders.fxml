@@ -15,7 +15,6 @@
 			            	<TableColumn fx:id="itemColumn" text="Item" />
 			            	<TableColumn fx:id="quantityColumn" text="Qty" />
 			            	<TableColumn fx:id="statusColumn" text="Status" />
-			            	<TableColumn fx:id="deliveryColumn" text="Exp. Delivery Date" />
 			         </columns>
 			      </TableView>
 			      <HBox styleClass="form-group">

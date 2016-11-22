@@ -27,7 +27,7 @@ public class Order {
 	private Item item;
 	
 	private int quantity;
-	private float total;
+	private Float total;
 	private String justification;
 	
 	@ManyToOne(fetch=FetchType.EAGER)

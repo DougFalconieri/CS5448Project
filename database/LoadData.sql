@@ -7,7 +7,7 @@ DELETE FROM ezprocure.user_role;
 DELETE FROM ezprocure.user;
 DELETE FROM ezprocure.role;
 
-/* Add users */
+/* Add people */
 INSERT INTO `ezprocure`.`user`
 (`id`,`email`,`password`, `first_name`, `last_name`)
 VALUES
@@ -20,6 +20,10 @@ INSERT INTO `ezprocure`.`user`
 (`id`,`email`,`password`, `first_name`, `last_name`)
 VALUES
 (3, 'wash7661@colorado.edu', 'password', 'Walid', 'Sharif');
+INSERT INTO `ezprocure`.`user`
+(`id`,`email`,`password`, `first_name`, `last_name`)
+VALUES
+(4, 'test', 'test', 'Test', 'User');
 
 /* Add roles */
 INSERT INTO `ezprocure`.`role`
@@ -83,6 +87,23 @@ INSERT INTO ezprocure.user_role
 VALUES
 (3, 4);
 
+INSERT INTO ezprocure.user_role
+(user_id, role_id)
+VALUES
+(4, 1);
+INSERT INTO ezprocure.user_role
+(user_id, role_id)
+VALUES
+(4, 2);
+INSERT INTO ezprocure.user_role
+(user_id, role_id)
+VALUES
+(4, 3);
+INSERT INTO ezprocure.user_role
+(user_id, role_id)
+VALUES
+(4, 4);
+
 /* Add categories */
 INSERT INTO `ezprocure`.`item_category`
 (`id`,`name`)
@@ -133,6 +154,6 @@ INSERT INTO `ezprocure`.`order`
 `status`, `item_id`, `employee_id`, `facility_id`)
 VALUES
 (1, 'I need a new, more powerful laptop', 1, 'My old laptop is too old to run the new version of our CAD software',
-'123', sysdate(), 'Created', 4, 1, 1);
+'123', sysdate(), 'Created', 4, 4, 1);
 
 
