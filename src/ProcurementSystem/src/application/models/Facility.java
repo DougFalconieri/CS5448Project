@@ -53,5 +53,8 @@ public class Facility {
 		this.zip = zip;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return name;
+	}
 }

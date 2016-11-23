@@ -25,12 +25,7 @@ public class LoginController extends BaseController {
 		User user = userRepository.findUser(email.getText(), password.getText());
 		if (user == null) {
 			password.setText("");
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Access Denied");
-			alert.setHeaderText("Invalid Login");
-			alert.setContentText("The email and password you entered were not recognized. Please try again.");
-
-			alert.showAndWait();
+			showError("Invalid Login", "The email and password you entered were not recognized. Please try again.");
 		} else {
 			applicationController.setCurrentUser(user);
 			applicationController.loadMenuedScreen("/application/ui/views/Welcome.fxml");

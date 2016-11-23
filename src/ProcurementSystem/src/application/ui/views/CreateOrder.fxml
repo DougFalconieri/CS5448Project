@@ -25,74 +25,49 @@
 					<HBox styleClass="form-group">
 						<children>
 							<Label styleClass="control-label" text="Item Category:" />
-							<ChoiceBox>
-								<items>
-							        <FXCollections fx:factory="observableArrayList">
-							            <String fx:value="Electronics" />
-							            <String fx:value="Office Supplies" />
-							            <String fx:value="Furniture" />
-							            <String fx:value="Other" />
-							        </FXCollections>
-							    </items>
-							</ChoiceBox>
+							<ChoiceBox fx:id="categoryChoiceBox" onAction="#categorySelected"></ChoiceBox>
 						</children>
 					</HBox>
 					<HBox styleClass="form-group">
 						<children>
 							<Label styleClass="control-label" text="Item:" />
-							<ChoiceBox>
-								<items>
-							        <FXCollections fx:factory="observableArrayList">
-							            <String fx:value="Laptop" />
-							            <String fx:value="Phone" />
-							            <String fx:value="Tablet" />
-							        </FXCollections>
-							    </items>
-							</ChoiceBox>
+							<ChoiceBox fx:id="itemChoiceBox"></ChoiceBox>
 						</children>
 					</HBox>
 					<HBox styleClass="form-group">
 						<children>
-							<Label styleClass="control-label" text="Item (if not in list):" />
-							<TextField />
+							<Label styleClass="control-label" text="Description:" />
+							<TextArea fx:id="descriptionTextArea" prefWidth="400" prefHeight="100" />
 						</children>
 					</HBox>
 					<HBox styleClass="form-group">
 						<children>
 							<Label styleClass="control-label" text="Quantity:" />
-							<TextField prefWidth="40" />
+							<TextField fx:id="quantityTextBox" prefWidth="40" />
 						</children>
 					</HBox>
 					<HBox styleClass="form-group">
 						<children>
 							<Label styleClass="control-label" text="Facility:" />
-							<ChoiceBox>
-								<items>
-							        <FXCollections fx:factory="observableArrayList">
-							            <String fx:value="San Jose" />
-							            <String fx:value="Boulder" />
-							            <String fx:value="Boston" />
-							        </FXCollections>
-							    </items>
-							</ChoiceBox>
+							<ChoiceBox fx:id="facilityChoiceBox"></ChoiceBox>
 						</children>
 					</HBox>
 					<HBox styleClass="form-group">
 						<children>
 							<Label styleClass="control-label" text="Office/Room Number:" />
-							<TextField prefWidth="40" />
+							<TextField fx:id="roomTextBox" prefWidth="80" />
 						</children>
 					</HBox>
 					<HBox styleClass="form-group">
 						<children>
 							<Label styleClass="control-label" text="Justification:" />
-							<TextArea />
+							<TextArea fx:id="justificationTextArea" prefWidth="400" prefHeight="100" />
 						</children>
 					</HBox>
 					<HBox styleClass="form-group">
 						<children>
-							<Button text="Save" />
-							<Button text="Submit" />
+							<Button onAction="#saveOrder" text="Save" />
+							<Button onAction="#submitOrder" text="Submit" />
 						</children>
 					</HBox>
 				</children>

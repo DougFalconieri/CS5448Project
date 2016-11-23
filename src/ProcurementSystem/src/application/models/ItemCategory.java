@@ -44,4 +44,9 @@ public class ItemCategory {
 	public void setItems(Set<Item> items) {
 		this.items = items;
 	}
+	
+	@Override
+	public String toString() {
+		return name;
+	}
 }

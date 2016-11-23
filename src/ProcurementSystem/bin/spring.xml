@@ -68,6 +68,12 @@
 	<bean id="MyOrdersController" class="application.ui.controllers.MyOrdersController">
 		<property name="orderRepository" ref="hibernateOrderRepository" />
 	</bean>
+	
+	<bean id="CreateOrderController" class="application.ui.controllers.CreateOrderController">
+		<property name="orderRepository" ref="hibernateOrderRepository" />
+		<property name="userRepository" ref="hibernateUserRepository" />
+		<property name="itemRepository" ref="hibernateItemRepository" />
+	</bean>
 
 	<bean id="WelcomeController" class="application.ui.controllers.WelcomeController">
 

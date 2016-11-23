@@ -27,4 +27,8 @@ public class HibernateOrderRepository implements OrderRepository {
 		query.setParameter("employeeId", employee.getId());
 	    return query.getResultList();
 	}
+	
+	public void saveOrder(Order order) {
+		sessionFactory.getCurrentSession().saveOrUpdate(order);
+	}
 }

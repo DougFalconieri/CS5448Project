@@ -154,6 +154,6 @@ INSERT INTO `ezprocure`.`order`
 `status`, `item_id`, `employee_id`, `facility_id`)
 VALUES
 (1, 'I need a new, more powerful laptop', 1, 'My old laptop is too old to run the new version of our CAD software',
-'123', sysdate(), 'Created', 4, 4, 1);
+'123', sysdate(), 'In Work', 4, 4, 1);
 
 
