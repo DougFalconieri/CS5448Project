@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import application.models.status.OrderStatus;
+
 @Entity
 public class Order {
 	@Id
@@ -58,6 +60,10 @@ public class Order {
 	
 	private String status;
 	
+	public boolean isEditableByUser(User user) {
+		OrderStatus statusObject = OrderStatus.getStatusObject(status);
+		return statusObject.canBeEditedByUser(this, user);
+	}
 	
 	public int getId() {
 		return id;

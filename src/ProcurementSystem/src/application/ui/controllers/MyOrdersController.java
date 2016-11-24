@@ -41,4 +41,15 @@ public class MyOrdersController extends BaseController {
 		List<Order> orders = orderRepository.getOrdersForEmployee(getCurrentUser());
 		orderTable.setItems(FXCollections.observableArrayList(orders));
 	}
+	
+	@FXML
+	private void selectOrder() {
+		Order selectedOrder = orderTable.getSelectionModel().getSelectedItem();
+		applicationController.setCurrentOrder(selectedOrder);
+		if (selectedOrder.isEditableByUser(getCurrentUser())) {
+			applicationController.loadMenuedScreen("/application/ui/views/CreateOrder.fxml");
+		} else {
+			applicationController.loadMenuedScreen("/application/ui/views/OrderDetails.fxml");
+		}
+	}
 }

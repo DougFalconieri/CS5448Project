@@ -20,9 +20,7 @@ import application.Main;
 import application.models.Employee;
 import application.models.Person;
 import application.models.QueryEmployeeDemo;
-
-
-
+import application.repositories.UserRepository;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -30,7 +28,7 @@ import javafx.scene.control.TableView;
 import application.Main;
 import application.models.Person;
 
-public class PersonOverviewController {
+public class PersonOverviewController extends BaseController {
     @FXML
     private TableView<Person> personTable;
     @FXML
@@ -56,9 +54,14 @@ public class PersonOverviewController {
 
     public PersonOverviewController() {
     }
+    
+    private UserRepository userRepository;
 
+    public void setUserRepository(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
-    @FXML
+	@FXML
     private void initialize() {
         // Initialize the person table with the two columns.
         //firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());

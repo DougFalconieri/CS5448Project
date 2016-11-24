@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.context.ApplicationContext;
 
+import application.models.Order;
 import application.models.User;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,7 +17,16 @@ public class ApplicationController {
 	private ApplicationContext context;
 	private Stage stage;
 	private User currentUser;
+	private Order currentOrder;
 	
+	public Order getCurrentOrder() {
+		return currentOrder;
+	}
+
+	public void setCurrentOrder(Order currentOrder) {
+		this.currentOrder = currentOrder;
+	}
+
 	public ApplicationController(ApplicationContext context, Stage stage) {
 		this.context = context;
 		this.stage = stage;

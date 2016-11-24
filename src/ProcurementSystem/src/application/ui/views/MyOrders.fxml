@@ -21,7 +21,7 @@
 			      </TableView>
 			      <HBox styleClass="form-group">
 						<children>
-							<Button text="View Details" />
+							<Button onAction="#selectOrder" text="Select Order" />
 						</children>
 					</HBox>
 				</children>

@@ -7,7 +7,7 @@ import application.models.Facility;
 import application.models.Item;
 import application.models.ItemCategory;
 import application.models.Order;
-import application.models.OrderStatus;
+import application.models.status.OrderStatus;
 import application.repositories.ItemRepository;
 import application.repositories.OrderRepository;
 import application.repositories.UserRepository;
@@ -53,6 +53,16 @@ public class CreateOrderController extends BaseController {
 		this.userRepository = userRepository;
 	}
 	
+	private void copyDataToControls() {
+		Order order = applicationController.getCurrentOrder();
+		itemChoiceBox.setValue(order.getItem());
+		descriptionTextArea.setText(order.getDescription());;
+		quantityTextBox.setText(Integer.toString(order.getQuantity()));
+		facilityChoiceBox.setValue(order.getFacility());
+		roomTextBox.setText(order.getRoom());
+		justificationTextArea.setText(order.getJustification());
+	}
+	
 	@Override
 	public void onLoad() {
 		categories = itemRepository.getCategories();
@@ -61,6 +71,10 @@ public class CreateOrderController extends BaseController {
 		
 		facilities = userRepository.getFacilities();
 		facilityChoiceBox.setItems(FXCollections.observableArrayList(facilities));
+		
+		if (applicationController.getCurrentOrder() != null) {
+			copyDataToControls();
+		}
 	}
 	
 	@FXML
@@ -118,21 +132,31 @@ public class CreateOrderController extends BaseController {
 		return true;
 	}
 	
-	@FXML
-	private void saveOrder() {
-		Order order = new Order();
+	private Order getCurrentOrder() {
+		return applicationController.getCurrentOrder() == null ? new Order() : applicationController.getCurrentOrder();
+	}
+	
+	private void saveOrder(String status) {
+		Order order = getCurrentOrder();
 		if (copyDataToOrder(order)) {
-			order.setStatus(OrderStatus.IN_WORK);
+			order.setStatus(status);
 			orderRepository.saveOrder(order);
+			applicationController.loadMenuedScreen("/application/ui/views/MyOrders.fxml");
 		}
 	}
 	
 	@FXML
+	private void saveInWorkOrder() {
+		saveOrder(OrderStatus.IN_WORK);
+	}
+	
+	@FXML
 	private void submitOrder() {
-		Order order = new Order();
-		if (copyDataToOrder(order)) {
-			order.setStatus(OrderStatus.SUBMITTED);
-			orderRepository.saveOrder(order);
-		}
+		saveOrder(OrderStatus.SUBMITTED);
+	}
+	
+	@FXML
+	private void goToListScreen() {
+		applicationController.loadMenuedScreen("/application/ui/views/MyOrders.fxml");
 	}
 }

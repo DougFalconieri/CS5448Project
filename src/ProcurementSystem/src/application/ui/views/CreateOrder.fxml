@@ -66,8 +66,9 @@
 					</HBox>
 					<HBox styleClass="form-group">
 						<children>
-							<Button onAction="#saveOrder" text="Save" />
-							<Button onAction="#submitOrder" text="Submit" />
+							<Button onAction="#saveInWorkOrder" text="Save" />
+							<Button onAction="#submitOrder" text="Save and Submit" />
+							<Button onAction="#goToListScreen" text="Back to Order List" />
 						</children>
 					</HBox>
 				</children>

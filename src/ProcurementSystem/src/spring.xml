@@ -15,7 +15,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/ezprocure"/>
         <property name="username" value="root"/>
-        <property name="password" value="0000"/>
+        <property name="password" value="root"/>
     </bean>
 
     <bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
@@ -88,4 +88,7 @@
         <property name="userRepository" ref="hibernateUserRepository" />
     </bean>
 
+	<bean id="OrderDetailsController" class="application.ui.controllers.OrderDetailsController">
+
+	</bean>
 </beans>

@@ -32,6 +32,7 @@ public class MainMenuController extends BaseController {
 	
 	@FXML
 	private void loadCreateOrderScreen() {
+		applicationController.setCurrentOrder(null);
 		applicationController.loadMenuedScreen("/application/ui/views/CreateOrder.fxml");
 	}
 	
