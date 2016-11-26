@@ -65,6 +65,11 @@ public class Order {
 		return statusObject.canBeEditedByUser(this, user);
 	}
 	
+	public boolean isCancelableByUser(User user) {
+		OrderStatus statusObject = OrderStatus.getStatusObject(status);
+		return statusObject.canBeCanceledByUser(this, user);
+	}
+	
 	public int getId() {
 		return id;
 	}

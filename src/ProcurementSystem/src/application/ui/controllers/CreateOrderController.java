@@ -13,11 +13,15 @@ import application.repositories.OrderRepository;
 import application.repositories.UserRepository;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 
 public class CreateOrderController extends BaseController {
+	private static final String MY_ORDERS_VIEW = "/application/ui/views/MyOrders.fxml";
 	private static final String ERROR_HEADER = "Save Failed";
 	private static final String INT_REGEX = "\\d+";
 	
@@ -39,6 +43,12 @@ public class CreateOrderController extends BaseController {
 	private TextField roomTextBox;
 	@FXML
 	private TextArea justificationTextArea;
+	@FXML
+	private Button cancelButton;
+	@FXML
+	private HBox buttonBox;
+	@FXML
+	private Label titleLabel;
 	
 	private List<ItemCategory> categories;
 	private List<Facility> facilities;
@@ -55,25 +65,32 @@ public class CreateOrderController extends BaseController {
 	
 	private void copyDataToControls() {
 		Order order = applicationController.getCurrentOrder();
-		itemChoiceBox.setValue(order.getItem());
+		itemChoiceBox.getSelectionModel().select(order.getItem());
+		categoryChoiceBox.getSelectionModel().select(order.getItem().getCategory());
 		descriptionTextArea.setText(order.getDescription());;
 		quantityTextBox.setText(Integer.toString(order.getQuantity()));
-		facilityChoiceBox.setValue(order.getFacility());
+		facilityChoiceBox.getSelectionModel().select(order.getFacility());
 		roomTextBox.setText(order.getRoom());
 		justificationTextArea.setText(order.getJustification());
 	}
 	
 	@Override
 	public void onLoad() {
+		Order currentOrder = applicationController.getCurrentOrder();
+		
 		categories = itemRepository.getCategories();
 		categoryChoiceBox.setItems(FXCollections.observableArrayList(categories));
-		//categoryChoiceBox.setValue(categories.get(0));
 		
 		facilities = userRepository.getFacilities();
 		facilityChoiceBox.setItems(FXCollections.observableArrayList(facilities));
 		
-		if (applicationController.getCurrentOrder() != null) {
+		if (currentOrder != null) {
 			copyDataToControls();
+			titleLabel.setText("Modify Purchase Order");
+		}
+		
+		if (!currentOrder.isCancelableByUser(getCurrentUser())) {
+			buttonBox.getChildren().remove(cancelButton);
 		}
 	}
 	
@@ -141,7 +158,7 @@ public class CreateOrderController extends BaseController {
 		if (copyDataToOrder(order)) {
 			order.setStatus(status);
 			orderRepository.saveOrder(order);
-			applicationController.loadMenuedScreen("/application/ui/views/MyOrders.fxml");
+			applicationController.loadMenuedScreen(MY_ORDERS_VIEW);
 		}
 	}
 	
@@ -157,6 +174,13 @@ public class CreateOrderController extends BaseController {
 	
 	@FXML
 	private void goToListScreen() {
-		applicationController.loadMenuedScreen("/application/ui/views/MyOrders.fxml");
+		applicationController.loadMenuedScreen(MY_ORDERS_VIEW);
+	}
+	
+	@FXML
+	private void cancelOrder() {
+		Order currentOrder = applicationController.getCurrentOrder();
+		orderRepository.cancelOrder(currentOrder.getId());
+		applicationController.loadMenuedScreen(MY_ORDERS_VIEW);
 	}
 }

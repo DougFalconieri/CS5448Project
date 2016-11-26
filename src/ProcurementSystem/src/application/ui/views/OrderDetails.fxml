@@ -12,7 +12,7 @@
 		<center>
 			<VBox  styleClass="main-content">
 				<children>
-					<Label  styleClass="header" text="Create Purchase Order" />
+					<Label  styleClass="header" text="Purchase Order Details" />
 					<HBox  styleClass="form-group">
 						<children>
 							<Label styleClass="control-label" text="Item:" />
@@ -55,9 +55,10 @@
 							<Label fx:id="justificationLabel"></Label>
 						</children>
 					</HBox>
-					<HBox styleClass="form-group">
+					<HBox fx:id="buttonBox" styleClass="form-group">
 						<children>
 							<Button onAction="#goToListScreen" text="Back to Order List" />
+							<Button fx:id="cancelButton" onAction="#cancelOrder" text="Cancel Order" />
 						</children>
 					</HBox>
 				</children>

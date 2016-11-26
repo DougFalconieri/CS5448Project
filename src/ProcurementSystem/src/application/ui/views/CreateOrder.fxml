@@ -21,7 +21,7 @@
 		<center>
 			<VBox styleClass="main-content">
 				<children>
-					<Label styleClass="header" text="Create Purchase Order" />
+					<Label fx:id="titleLabel" styleClass="header" text="Create Purchase Order" />
 					<HBox styleClass="form-group">
 						<children>
 							<Label styleClass="control-label" text="Item Category:" />
@@ -64,10 +64,11 @@
 							<TextArea fx:id="justificationTextArea" prefWidth="400" prefHeight="100" />
 						</children>
 					</HBox>
-					<HBox styleClass="form-group">
+					<HBox fx:id="buttonBox" styleClass="form-group">
 						<children>
 							<Button onAction="#saveInWorkOrder" text="Save" />
 							<Button onAction="#submitOrder" text="Save and Submit" />
+							<Button fx:id="cancelButton" onAction="#cancelOrder" text="Cancel Order" />
 							<Button onAction="#goToListScreen" text="Back to Order List" />
 						</children>
 					</HBox>

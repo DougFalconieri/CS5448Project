@@ -89,6 +89,6 @@
     </bean>
 
 	<bean id="OrderDetailsController" class="application.ui.controllers.OrderDetailsController">
-
+		<property name="orderRepository" ref="hibernateOrderRepository" />
 	</bean>
 </beans>
