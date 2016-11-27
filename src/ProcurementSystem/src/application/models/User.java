@@ -7,12 +7,14 @@ import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class User {
@@ -31,6 +33,10 @@ public class User {
 				joinColumns={@JoinColumn(name="user_id")}, 
 				inverseJoinColumns={@JoinColumn(name="role_id")})
 	private Set<Role> roles = new HashSet<Role>();
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="manager_id")
+	private User manager;
 	
 	
 	public int getId() {
@@ -64,6 +70,13 @@ public class User {
 		this.password = password;
 	}
 	
+	
+	public User getManager() {
+		return manager;
+	}
+	public void setManager(User manager) {
+		this.manager = manager;
+	}
 	public String getRolesDescription() {
 		if (roles.size() == 0) return "Employee";
 		return roles.stream()

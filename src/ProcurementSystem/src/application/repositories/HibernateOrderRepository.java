@@ -42,4 +42,14 @@ public class HibernateOrderRepository implements OrderRepository {
 		order.setStatus(OrderStatus.CANCELED);
 		session.update(order);
 	}
+	
+	@Override
+	public List<Order> getOrderForReview(User manager) {
+		String hql = "FROM Order o JOIN FETCH o.item i JOIN FETCH i.category JOIN FETCH o.facility JOIN FETCH o.employee e JOIN FETCH e.manager m WHERE m.id = :managerId AND o.status = :status";
+		@SuppressWarnings("unchecked")
+		TypedQuery<Order> query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("managerId", manager.getId());
+		query.setParameter("status", OrderStatus.SUBMITTED);
+	    return query.getResultList();
+	}
 }

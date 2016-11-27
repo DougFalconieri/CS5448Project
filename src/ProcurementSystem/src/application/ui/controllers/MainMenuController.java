@@ -49,7 +49,7 @@ public class MainMenuController extends BaseController {
 	}*/
 	@FXML
 	private void loadReviewOrdersScreen() throws IOException {
-		applicationController.loadMenuedScreen("PersonOverview.fxml");
+		applicationController.loadMenuedScreen("/application/ui/views/PersonOverview.fxml");
 	}
 
 }

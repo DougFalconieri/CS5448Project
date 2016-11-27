@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.event.ChangeEvent;
@@ -23,11 +24,14 @@ import org.springframework.stereotype.Repository;
 
 import application.Main;
 import application.models.Employee;
+import application.models.Order;
 import application.models.Person;
 import application.models.QueryEmployeeDemo;
+import application.models.User;
 import application.repositories.EmployeeRepository;
 import application.repositories.HibernateEmployeeRepository;
 import application.repositories.HibernateUserRepository;
+import application.repositories.OrderRepository;
 import application.repositories.UserRepository;
 import application.ui.controllers.PersonOverviewController;
 import application.ui.controllers.PersonOverviewController;
@@ -59,11 +63,19 @@ public class PersonOverviewController extends BaseController {
     private Label reviewOrderLabel;
     //
     private EmployeeRepository employeeRepository;
-    private static String current_id;
+    private OrderRepository orderRepository;
+    
+    public void setOrderRepository(OrderRepository orderRepository) {
+		this.orderRepository = orderRepository;
+	}
+
+	private static String current_id;
     private PersonOverviewController main;
     private ObservableList<Person> personData = FXCollections.observableArrayList();
     public PersonOverviewController() {
     }
+    
+    
 
 /*
     @FXML
@@ -95,23 +107,33 @@ public class PersonOverviewController extends BaseController {
     	employeeRepository.queryEmployee();
     	System.out.print("query employee done......");
 
-    	System.out.println(employeeRepository.getTheEmployees());
+    	
+    	List<Person> people = new ArrayList<Person>();
     	for (Employee tempEmployee : employeeRepository.getTheEmployees()){
     		System.out.println(tempEmployee);
-    		personData.add(new Person(tempEmployee.getFirstName(), tempEmployee.getLastName(), tempEmployee.getId(), tempEmployee.getreviewOrder()));
+    		people.add(new Person(tempEmployee.getFirstName(), tempEmployee.getLastName(), tempEmployee.getId(), tempEmployee.getreviewOrder()));
 
     	}
-
+    	
     	idColumn.setCellValueFactory(
                 cellData -> cellData.getValue().idProperty());
         FirstNameColumn.setCellValueFactory(
                 cellData -> cellData.getValue().firstNameProperty());
+        
+    	personTable.setItems(FXCollections.observableArrayList(people));
     }
 
 
 
     @FXML
     private void initialize() {
+    	
+    }
+    
+    @Override
+    public void onLoad() {
+    	User currentUser = getCurrentUser();
+    	List<Order> ordersToReview = orderRepository.getOrderForReview(currentUser);
     	addPerson();
         showPersonDetails(null);
         personTable.getSelectionModel().selectedItemProperty().addListener(
