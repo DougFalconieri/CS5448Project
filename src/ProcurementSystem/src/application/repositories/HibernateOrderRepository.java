@@ -68,7 +68,7 @@ public class HibernateOrderRepository implements OrderRepository {
 		Session session = sessionFactory.getCurrentSession();
 			//theEmployees = session.createQuery("from Employee e where e.status = 'none'").list();
 			//theEmployees = session.createQuery("FROM Order o FETCH JOIN o.employee e where e.status = 'none'").list();
-			theEmployees = session.createQuery("from Order o where o.status = 'none'").list();
+			theEmployees = session.createQuery("from Order o where o.status = 'Submitted'").list();
 			for (Order tempEmployee : theEmployees){
 
 				System.out.println(tempEmployee);
