@@ -15,7 +15,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/ezprocure"/>
         <property name="username" value="root"/>
-        <property name="password" value="root"/>
+        <property name="password" value="0000"/>
     </bean>
 
     <bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
@@ -29,7 +29,7 @@
                 <value>application.models.ItemCategory</value>
                 <value>application.models.Vendor</value>
                 <value>application.models.Facility</value>
-                <value>application.models.Employee</value>
+
             </list>
         </property>
         <property name="hibernateProperties">
@@ -61,9 +61,6 @@
 		<property name="sessionFactory" ref="hibernateSessionFactory" />
 	</bean>
 
-	<bean id="hibernateEmployeeRepository" class="application.repositories.HibernateEmployeeRepository">
-		<property name="sessionFactory" ref="hibernateSessionFactory" />
-	</bean>
 
 
 	<!-- Controllers -->
@@ -92,7 +89,6 @@
 	<!-- Yi's -->
 
 	<bean id="PersonOverviewController" class="application.ui.controllers.PersonOverviewController">
-        <property name="employeeRepository" ref="hibernateEmployeeRepository" />
         <property name="orderRepository" ref="hibernateOrderRepository" />
     </bean>
 

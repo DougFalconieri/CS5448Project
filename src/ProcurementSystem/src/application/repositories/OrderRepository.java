@@ -10,4 +10,9 @@ public interface OrderRepository {
 	void saveOrder(Order order);
 	void cancelOrder(int orderId);
 	List<Order> getOrderForReview(User manager);
+
+	List<Order> getTheEmployees();
+	void queryEmployee();
+	void Approved();
+	void Rejected();
 }

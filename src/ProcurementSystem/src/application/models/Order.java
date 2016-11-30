@@ -20,56 +20,60 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String description;
-	
+
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="employee_id")
 	private User employee;
-	
+
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="item_id")
 	private Item item;
-	
+
 	private int quantity;
 	private Float total;
 	private String justification;
-	
+
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="facility_id")
 	private Facility facility;
-	
+
 	private String room;
-	
+
 	@Column(name="created_date")
 	private Date createdDate;
-	
+
 	@Column(name="executed_date")
 	private Date executedDate;
-	
+
 	@Column(name="expected_delivery_date")
 	private Date expectedDeliveryDate;
-	
+
 	@Column(name="received_date")
 	private Date receivedDate;
-	
+
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="vendor_id")
 	private Vendor vendor;
-	
+
 	@Column(name="tracking_number")
 	private String trackingNumber;
-	
+
+
+	@Column(name="status")
 	private String status;
-	
+
+	//private String status;
+
 	public boolean isEditableByUser(User user) {
 		OrderStatus statusObject = OrderStatus.getStatusObject(status);
 		return statusObject.canBeEditedByUser(this, user);
 	}
-	
+
 	public boolean isCancelableByUser(User user) {
 		OrderStatus statusObject = OrderStatus.getStatusObject(status);
 		return statusObject.canBeCanceledByUser(this, user);
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -170,4 +174,25 @@ public class Order {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public String getFirstName() {
+		String firstName = getEmployee().getFirstName();
+
+		return firstName;
+	}
+
+	public String getLastName() {
+
+		String lastName = getEmployee().getLastName();
+
+		return lastName;
+	}
+
+	public String getreviewOrder() {
+		return justification;
+	}
+
+
+
+
 }

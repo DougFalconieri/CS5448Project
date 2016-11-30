@@ -4,9 +4,8 @@ import java.io.IOException;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import application.models.Employee;
+
 import application.models.Person;
-import application.models.QueryEmployeeDemo;
 import application.ui.controllers.ApplicationController;
 import application.ui.controllers.PersonOverviewController;
 import javafx.application.Application;

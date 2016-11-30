@@ -23,13 +23,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 
 import application.Main;
-import application.models.Employee;
 import application.models.Order;
 import application.models.Person;
-import application.models.QueryEmployeeDemo;
 import application.models.User;
-import application.repositories.EmployeeRepository;
-import application.repositories.HibernateEmployeeRepository;
 import application.repositories.HibernateUserRepository;
 import application.repositories.OrderRepository;
 import application.repositories.UserRepository;
@@ -61,10 +57,9 @@ public class PersonOverviewController extends BaseController {
     private Label lastNameLabel;
     @FXML
     private Label reviewOrderLabel;
-    //
-    private EmployeeRepository employeeRepository;
+
     private OrderRepository orderRepository;
-    
+
     public void setOrderRepository(OrderRepository orderRepository) {
 		this.orderRepository = orderRepository;
 	}
@@ -74,52 +69,31 @@ public class PersonOverviewController extends BaseController {
     private ObservableList<Person> personData = FXCollections.observableArrayList();
     public PersonOverviewController() {
     }
-    
-    
 
-/*
-    @FXML
-    public void addPerson() {
-    	personData.removeAll(personData);
-    	QueryEmployeeDemo employeelist = new QueryEmployeeDemo();
-    	employeelist.queryEmployee();
-    	for (Employee tempEmployee : employeelist.getTheEmployees()){
-    		personData.add(new Person(tempEmployee.getFirstName(), tempEmployee.getLastName(), tempEmployee.getId(), tempEmployee.getreviewOrder()));
-    	}
-    	idColumn.setCellValueFactory(
-                cellData -> cellData.getValue().idProperty());
-        FirstNameColumn.setCellValueFactory(
-                cellData -> cellData.getValue().firstNameProperty());
-    }
 
-*/
-	public void setEmployeeRepository(EmployeeRepository employeeRepository) {
-		this.employeeRepository = employeeRepository;
-	}
 
 
     @FXML
     public void addPerson() {
     	personData.removeAll(personData);
-    	//HibernateEmployeeRepository employeelist = new HibernateEmployeeRepository();
-    	//employeelist.queryEmployee();
+
     	System.out.print("query employee......");
-    	employeeRepository.queryEmployee();
+    	orderRepository.queryEmployee();
     	System.out.print("query employee done......");
 
-    	
+
     	List<Person> people = new ArrayList<Person>();
-    	for (Employee tempEmployee : employeeRepository.getTheEmployees()){
+    	for (Order tempEmployee : orderRepository.getTheEmployees()){
     		System.out.println(tempEmployee);
     		people.add(new Person(tempEmployee.getFirstName(), tempEmployee.getLastName(), tempEmployee.getId(), tempEmployee.getreviewOrder()));
 
     	}
-    	
+
     	idColumn.setCellValueFactory(
                 cellData -> cellData.getValue().idProperty());
         FirstNameColumn.setCellValueFactory(
                 cellData -> cellData.getValue().firstNameProperty());
-        
+
     	personTable.setItems(FXCollections.observableArrayList(people));
     }
 
@@ -127,9 +101,9 @@ public class PersonOverviewController extends BaseController {
 
     @FXML
     private void initialize() {
-    	
+
     }
-    
+
     @Override
     public void onLoad() {
     	User currentUser = getCurrentUser();
@@ -187,95 +161,22 @@ public class PersonOverviewController extends BaseController {
 		this.current_id = current_id;
 	}
 
-	//new code
+
 	@FXML
 	private void Approved() {
-		//HibernateEmployeeRepository qe = null;
-		employeeRepository.Approved();
-		initialize();
+
+		orderRepository.Approved();
+		onLoad();
 		System.out.println("Done!");
 	}
 
 	@FXML
 	private void Rejected() {
-		//HibernateUserRepository qe = null;
-		employeeRepository.Rejected();
-		initialize();
+
+		orderRepository.Rejected();
+		onLoad();
 		System.out.println("Done!");
 	}
-	/*@Repository
-    private void Approved() {
-
-		/*SessionFactory factory = new Configuration()
-				.configure("hibernate.cfg.xml")
-				.addAnnotatedClass(Employee.class)
-				.buildSessionFactory();*/
-
-		/*private SessionFactory sessionFactory;
-
-		public void setSessionFactory(SessionFactory sf){
-			this.sessionFactory = sf;
-		}
-
-		Session session = factory.getCurrentSession();
-
-		try {
-			String employeeId = PersonOverviewController.getCurrent_id() ;
-
-			session = factory.getCurrentSession();
-			//session.beginTransaction();
-
-			System.out.println("\nGetting employee with id: " + employeeId);
-
-			Employee myEmployee = session.get(Employee.class, Integer.valueOf(employeeId));
-
-			System.out.println("Updating employee...");
-			myEmployee.setStatus("Approved");
-			//session.getTransaction().commit();
-
-
-	    	initialize();
-			System.out.println("Done!");
-		}
-		finally {
-		factory.close();
-		}
-
-	}*/
-
-	/*@FXML
-    private void Rejected() {
-		SessionFactory factory = new Configuration()
-				.configure("hibernate.cfg.xml")
-				.addAnnotatedClass(Employee.class)
-				.buildSessionFactory();
-
-		Session session = factory.getCurrentSession();
-
-		try {
-			String employeeId = PersonOverviewController.getCurrent_id() ;
-
-			session = factory.getCurrentSession();
-			session.beginTransaction();
-
-			System.out.println("\nGetting employee with id: " + employeeId);
-
-			Employee myEmployee = session.get(Employee.class, Integer.valueOf(employeeId));
-
-			System.out.println("Updating employee...");
-			myEmployee.setStatus("Rejected");
-
-
-			session.getTransaction().commit();
-
-			initialize();
-			System.out.println("Done!");
-		}
-		finally {
-		factory.close();
-		}
-	}*/
-
 
 
 }

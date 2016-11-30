@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import application.models.Order;
 import application.models.User;
 import application.models.status.OrderStatus;
+import application.ui.controllers.PersonOverviewController;
 
 @Transactional
 public class HibernateOrderRepository implements OrderRepository {
@@ -20,7 +21,7 @@ public class HibernateOrderRepository implements OrderRepository {
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
-    
+
 	@Override
 	public List<Order> getOrdersForEmployee(User employee) {
 		String hql = "FROM Order o JOIN FETCH o.item i JOIN FETCH i.category JOIN FETCH o.facility JOIN FETCH o.employee e WHERE e.id = :employeeId";
@@ -29,12 +30,12 @@ public class HibernateOrderRepository implements OrderRepository {
 		query.setParameter("employeeId", employee.getId());
 	    return query.getResultList();
 	}
-	
+
 	@Override
 	public void saveOrder(Order order) {
 		sessionFactory.getCurrentSession().saveOrUpdate(order);
 	}
-	
+
 	@Override
 	public void cancelOrder(int orderId) {
 		Session session = sessionFactory.getCurrentSession();
@@ -42,7 +43,7 @@ public class HibernateOrderRepository implements OrderRepository {
 		order.setStatus(OrderStatus.CANCELED);
 		session.update(order);
 	}
-	
+
 	@Override
 	public List<Order> getOrderForReview(User manager) {
 		String hql = "FROM Order o JOIN FETCH o.item i JOIN FETCH i.category JOIN FETCH o.facility JOIN FETCH o.employee e JOIN FETCH e.manager m WHERE m.id = :managerId AND o.status = :status";
@@ -52,4 +53,66 @@ public class HibernateOrderRepository implements OrderRepository {
 		query.setParameter("status", OrderStatus.SUBMITTED);
 	    return query.getResultList();
 	}
+
+	private List<Order> theEmployees;
+
+
+	@Override
+	public List<Order> getTheEmployees() {
+		return theEmployees;
+	}
+
+	@Override
+
+	public void queryEmployee() {
+		Session session = sessionFactory.getCurrentSession();
+			//theEmployees = session.createQuery("from Employee e where e.status = 'none'").list();
+			//theEmployees = session.createQuery("FROM Order o FETCH JOIN o.employee e where e.status = 'none'").list();
+			theEmployees = session.createQuery("from Order o where o.status = 'none'").list();
+			for (Order tempEmployee : theEmployees){
+
+				System.out.println(tempEmployee);
+			}
+
+			System.out.println("Done!");
+	}
+
+	@Override
+	public void Approved() {
+		Session session = sessionFactory.getCurrentSession();
+
+			String employeeId = PersonOverviewController.getCurrent_id() ;
+
+			session = sessionFactory.getCurrentSession();
+
+
+			System.out.println("\nGetting employee with id: " + employeeId);
+
+			Order myEmployee = session.get(Order.class, Integer.valueOf(employeeId));
+
+			System.out.println("Updating employee...");
+			myEmployee.setStatus("Approved");
+
+	}
+
+	@Override
+	public void Rejected() {
+		Session session = sessionFactory.getCurrentSession();
+
+			String employeeId = PersonOverviewController.getCurrent_id() ;
+
+			session = sessionFactory.getCurrentSession();
+
+
+			System.out.println("\nGetting employee with id: " + employeeId);
+
+			Order myEmployee = session.get(Order.class, Integer.valueOf(employeeId));
+
+			System.out.println("Updating employee...");
+			myEmployee.setStatus("Rejected");
+
+
+
+	}
+
 }
