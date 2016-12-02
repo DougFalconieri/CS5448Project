@@ -7,6 +7,7 @@ public abstract class OrderStatus {
 	public static final String IN_WORK = "In Work";
 	public static final String SUBMITTED = "Submitted";
 	public static final String CANCELED = "Canceled";
+	public static final String APPROVED = "Approved";
 	
 	private static OrderStatus inWorkStatus = new InWorkStatus();
 	private static OrderStatus submittedStatus = new SubmittedStatus();

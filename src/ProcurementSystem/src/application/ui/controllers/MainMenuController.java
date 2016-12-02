@@ -43,10 +43,11 @@ public class MainMenuController extends BaseController {
 		applicationController.loadMenuedScreen("/application/ui/views/MyOrders.fxml");
 	}
 
-	/*@FXML
-	private void loadReviewOrdersScreen() {
-		applicationController.loadMenuedScreen("/application/ui/views/ReviewOrder.fxml");
-	}*/
+	@FXML
+	private void loadProcessOrderScreen() {
+		applicationController.loadMenuedScreen("/application/ui/views/ProcessOrder.fxml");
+	}
+
 	@FXML
 	private void loadReviewOrdersScreen() throws IOException {
 		applicationController.loadMenuedScreen("/application/ui/views/PersonOverview.fxml");

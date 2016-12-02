@@ -32,6 +32,15 @@ public class HibernateOrderRepository implements OrderRepository {
 	}
 
 	@Override
+	public List<Order> getApprovedOrders() {
+		String hql = "FROM Order o WHERE o.status = :status";
+		@SuppressWarnings("unchecked")
+		TypedQuery<Order> query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("status", OrderStatus.APPROVED);
+	    return query.getResultList();
+	}
+
+	@Override
 	public void saveOrder(Order order) {
 		sessionFactory.getCurrentSession().saveOrUpdate(order);
 	}

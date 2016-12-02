@@ -13,7 +13,7 @@
 		<MenuItem onAction="#loadReviewOrdersScreen" text="Review Orders" />
 	</Menu>
 	<Menu fx:id="procurementOfficerMenu" text="Order Processing">
-		<MenuItem text="Process Orders" />
+		<MenuItem onAction="#loadProcessOrderScreen" text="Process Orders" />
 	</Menu>
 	<Menu fx:id="procurementManagerMenu" text="Vendor Review">
 		<MenuItem text="Review Vendors" />

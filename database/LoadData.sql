@@ -155,5 +155,10 @@ INSERT INTO `ezprocure`.`order`
 VALUES
 (1, 'I need a new, more powerful laptop', 1, 'My old laptop is too old to run the new version of our CAD software',
 '123', sysdate(), 'Submitted', 4, 4, 1);
-
+INSERT INTO `ezprocure`.`order`
+(`id`, `description`, `quantity`, `justification`, `room`, `created_date`,
+`status`, `item_id`, `employee_id`, `facility_id`)
+VALUES
+(2, 'I need a new stapler', 1, 'I lost mine',
+'123', sysdate(), 'Approved', 4, 4, 1);
 

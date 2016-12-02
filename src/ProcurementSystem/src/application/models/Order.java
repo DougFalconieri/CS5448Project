@@ -99,6 +99,9 @@ public class Order {
 		this.item = item;
 	}
 	public float getTotal() {
+		if (total == null) {
+			total = 0.0f;
+		}
 		return total;
 	}
 	public void setTotal(float total) {

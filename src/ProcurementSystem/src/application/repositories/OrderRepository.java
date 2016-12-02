@@ -7,6 +7,7 @@ import application.models.User;
 
 public interface OrderRepository {
 	List<Order> getOrdersForEmployee(User employee);
+	List<Order> getApprovedOrders();
 	void saveOrder(Order order);
 	void cancelOrder(int orderId);
 	List<Order> getOrderForReview(User manager);
