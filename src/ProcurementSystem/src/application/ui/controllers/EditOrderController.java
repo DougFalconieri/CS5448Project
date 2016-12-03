@@ -1,6 +1,6 @@
 package application.ui.controllers;
 
-import java.util.List;
+import java.util.*;
 
 import application.models.Order;
 import application.models.Vendor;
@@ -43,6 +43,7 @@ public class EditOrderController extends BaseController {
 	private ChoiceBox<String> vendorList;
 
 	private List<Vendor> vendors;
+	private List<String> vendorNames;
 
 	@Override
 	public void onLoad() {
@@ -62,7 +63,11 @@ public class EditOrderController extends BaseController {
 		}
 
 		vendors = vendorRepository.getVendors();
-		vendorList.setItems(FXCollections.observableArrayList(vendors.toString()));
+		vendorNames = new ArrayList<String>();
+		for (Vendor vendor : vendors) {
+			vendorNames.add(vendor.getName());
+		}
+		vendorList.setItems(FXCollections.observableArrayList(vendorNames));
 		if (currentOrder.getVendor() != null) {
 			vendorList.getSelectionModel().select(currentOrder.getVendor().toString());
 		}
@@ -91,7 +96,7 @@ public class EditOrderController extends BaseController {
 			return false;
 		}
 		for (Vendor vendor : vendors) {
-			if (vendor.toString() == selectedVendor) {
+			if (vendor.getName() == selectedVendor) {
 				order.setVendor(vendor);
 			}
 		}
@@ -111,6 +116,10 @@ public class EditOrderController extends BaseController {
 		return true;
 	}
 
+	@FXML
+	private void addVendor() {
+		applicationController.loadMenuedScreen("/application/ui/views/AddVendor.fxml");
+	}
 	@FXML
 	private void saveOrder() {
 		Order order = applicationController.getCurrentOrder();

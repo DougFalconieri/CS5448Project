@@ -24,4 +24,9 @@ public class HibernateVendorRepository implements VendorRepository {
 		TypedQuery<Vendor> query = sessionFactory.getCurrentSession().createQuery(hql);
 	    return query.getResultList();
 	}
+
+	@Override
+	public void saveVendor(Vendor vendor) {
+		sessionFactory.getCurrentSession().saveOrUpdate(vendor);
+	}
 }

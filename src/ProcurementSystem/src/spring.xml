@@ -97,6 +97,10 @@
 		<property name="vendorRepository" ref="hibernateVendorRepository" />
 	</bean>
 
+	<bean id="AddVendorController" class="application.ui.controllers.AddVendorController">
+		<property name="vendorRepository" ref="hibernateVendorRepository" />
+	</bean>
+	
 	<!-- Yi's -->
 
 	<bean id="PersonOverviewController" class="application.ui.controllers.PersonOverviewController">
