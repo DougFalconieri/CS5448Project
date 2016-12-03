@@ -69,8 +69,6 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 	public User getManager() {
 		return manager;
 	}
@@ -83,9 +81,11 @@ public class User {
 			  .map(Role::getName)
 			  .collect(Collectors.joining(", "));
 	}
-	
 	public boolean hasRole(String roleName) {
 		return roles.stream()
 			  .anyMatch(role -> role.getName().equals(roleName));
+	}
+	public String toString() {
+		return firstName + " " + lastName;
 	}
 }
