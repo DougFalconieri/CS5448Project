@@ -89,7 +89,7 @@ public class CreateOrderController extends BaseController {
 			titleLabel.setText("Modify Purchase Order");
 		}
 		
-		if (!currentOrder.isCancelableByUser(getCurrentUser())) {
+		if (currentOrder != null && !currentOrder.isCancelableByUser(getCurrentUser())) {
 			buttonBox.getChildren().remove(cancelButton);
 		}
 	}
