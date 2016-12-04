@@ -31,6 +31,4 @@ public class Vendor {
 	public void setPreferred(boolean preferred) {
 		this.preferred = preferred;
 	}
-	
-	
 }

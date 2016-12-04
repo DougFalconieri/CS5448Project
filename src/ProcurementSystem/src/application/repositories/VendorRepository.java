@@ -6,4 +6,5 @@ import application.models.Vendor;
 
 public interface VendorRepository {
 	List<Vendor> getVendors();
+	void saveVendor(Vendor vendor);
 }

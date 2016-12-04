@@ -50,6 +50,7 @@
 						<children>
 							<Label styleClass="control-label" text="Vendor:" />
 							<ChoiceBox fx:id="vendorList" />
+							<Button text="Add a different vendor" onAction="#addVendor" />
 						</children>
 					</HBox>
 					<HBox styleClass="form-group">
@@ -66,7 +67,7 @@
 					</HBox>
 					<HBox styleClass="form-group">
 						<children>
-							<Button text="Save" onAction="#saveOrder"/>
+							<Button text="Save" onAction="#saveOrder" />
 						</children>
 					</HBox>
 				</children>

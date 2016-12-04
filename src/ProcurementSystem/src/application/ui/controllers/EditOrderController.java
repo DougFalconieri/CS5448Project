@@ -1,6 +1,6 @@
 package application.ui.controllers;
 
-import java.util.List;
+import java.util.*;
 
 import application.models.Order;
 import application.models.Vendor;
@@ -40,9 +40,10 @@ public class EditOrderController extends BaseController {
 	@FXML
 	private DatePicker expectedDeliveryDate;
 	@FXML
-	private ChoiceBox<Vendor> vendorList;
+	private ChoiceBox<String> vendorList;
 
 	private List<Vendor> vendors;
+	private List<String> vendorNames;
 
 	@Override
 	public void onLoad() {
@@ -52,9 +53,7 @@ public class EditOrderController extends BaseController {
 		quantity.setText(Integer.toString(currentOrder.getQuantity()));
 		status.setText(currentOrder.getStatus());
 
-		if (currentOrder.getTotal() != 0.0f) {
-			total.setText(Float.toString(currentOrder.getTotal()));			
-		}
+		total.setText(Float.toString(currentOrder.getTotal()));
 
 		if (currentOrder.getTrackingNumber() != null) {
 			trackingNumber.setText(currentOrder.getTrackingNumber());
@@ -64,10 +63,13 @@ public class EditOrderController extends BaseController {
 		}
 
 		vendors = vendorRepository.getVendors();
-		vendorList.setItems(FXCollections.observableArrayList(vendors));
-
+		vendorNames = new ArrayList<String>();
+		for (Vendor vendor : vendors) {
+			vendorNames.add(vendor.getName());
+		}
+		vendorList.setItems(FXCollections.observableArrayList(vendorNames));
 		if (currentOrder.getVendor() != null) {
-			vendorList.getSelectionModel().select(currentOrder.getVendor());
+			vendorList.getSelectionModel().select(currentOrder.getVendor().toString());
 		}
 	}
 
@@ -88,12 +90,16 @@ public class EditOrderController extends BaseController {
 		}
 		order.setTotal(Float.parseFloat(total.getText()));
 
-		Vendor selectedVendor = vendorList.valueProperty().get();
+		String selectedVendor = vendorList.valueProperty().get();
 		if (selectedVendor == null) {
 			showError(ERROR_HEADER, "Vendor is required");
 			return false;
 		}
-		order.setVendor(selectedVendor);
+		for (Vendor vendor : vendors) {
+			if (vendor.getName() == selectedVendor) {
+				order.setVendor(vendor);
+			}
+		}
 
 		if (trackingNumber.getText().length() == 0) {
 			showError(ERROR_HEADER, "Tracking number is required");
@@ -110,6 +116,10 @@ public class EditOrderController extends BaseController {
 		return true;
 	}
 
+	@FXML
+	private void addVendor() {
+		applicationController.loadMenuedScreen("/application/ui/views/AddVendor.fxml");
+	}
 	@FXML
 	private void saveOrder() {
 		Order order = applicationController.getCurrentOrder();
