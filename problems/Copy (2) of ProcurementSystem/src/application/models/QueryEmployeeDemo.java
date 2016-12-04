@@ -6,11 +6,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import application.models.Employee;
 import application.repositories.HibernateUserRepository;
 import application.ui.controllers.PersonOverviewController;
 @Repository
+@Transactional
 public class QueryEmployeeDemo {
 	//new code
 	private SessionFactory sessionFactory;
