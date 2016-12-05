@@ -27,13 +27,10 @@ public class ProcessOrderController extends BaseController {
 	@FXML
 	private TableColumn<Order, String> quantityColumn;
 	@FXML
-	private TableColumn<Order, String> totalColumn;
-	@FXML
 	private TableColumn<Order, String> facilityColumn;
 	@FXML
 	private TableColumn<Order, String> roomColumn;
-	@FXML
-	private TableColumn<Order, String> statusColumn;
+
 
 	@Override
 	public void onLoad() {
@@ -41,10 +38,8 @@ public class ProcessOrderController extends BaseController {
 		itemColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("item"));
 		employeeColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("employee"));
 		quantityColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("quantity"));
-		totalColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("total"));
 		facilityColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("facility"));
 		roomColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("room"));
-		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("status"));
 
 		List<Order> orders = orderRepository.getApprovedOrders();
 		orderTable.setItems(FXCollections.observableArrayList(orders));
