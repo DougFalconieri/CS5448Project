@@ -4,6 +4,7 @@ import java.util.*;
 
 import application.models.Order;
 import application.models.Vendor;
+import application.models.status.OrderStatus;
 import application.repositories.OrderRepository;
 import application.repositories.VendorRepository;
 import javafx.collections.FXCollections;
@@ -43,7 +44,6 @@ public class EditOrderController extends BaseController {
 	private ChoiceBox<String> vendorList;
 
 	private List<Vendor> vendors;
-	private List<String> vendorNames;
 
 	@Override
 	public void onLoad() {
@@ -63,7 +63,7 @@ public class EditOrderController extends BaseController {
 		}
 
 		vendors = vendorRepository.getVendors();
-		vendorNames = new ArrayList<String>();
+		List<String> vendorNames = new ArrayList<String>();
 		for (Vendor vendor : vendors) {
 			vendorNames.add(vendor.getName());
 		}
@@ -124,7 +124,7 @@ public class EditOrderController extends BaseController {
 	private void saveOrder() {
 		Order order = applicationController.getCurrentOrder();
 		if (copyDataToOrder(order)) {
-			order.setStatus("Processed");
+			order.setStatus(OrderStatus.PROCESSED);
 			order.setExecutedDate(getCurrentDate());
 			orderRepository.saveOrder(order);
 			applicationController.loadMenuedScreen("/application/ui/views/ProcessOrder.fxml");

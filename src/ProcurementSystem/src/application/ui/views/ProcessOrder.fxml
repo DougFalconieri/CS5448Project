@@ -16,10 +16,8 @@
 			        		<TableColumn fx:id="employeeColumn" text="Employee" />
 			            	<TableColumn fx:id="itemColumn" text="Item" />
 			            	<TableColumn fx:id="quantityColumn" text="Qty" />
-			            	<TableColumn fx:id="totalColumn" text="Total" />
 			            	<TableColumn fx:id="facilityColumn" text="Facility" />
 			            	<TableColumn fx:id="roomColumn" text="Room" />
-			            	<TableColumn fx:id="statusColumn" text="Status" />
 			         	</columns>
 			      	</TableView>
 					<HBox styleClass="form-group">
